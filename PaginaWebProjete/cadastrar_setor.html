@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Downloads - CEPEG</title>
+    <link rel="icon" type="image/png" href="img/logo_CEPEG_teste.png">
+    <!-- Fonte -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style1.css">
+    <!-- Scripts -->
+    <script
+        src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script><link rel="stylesheet" href="css/style.css">
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/1a97c1881e.js" crossorigin="anonymous"></script>
+    <!-- Progress Bar -->
+    <script src="js/progressbar.min.js"></script>
+    <!-- Parallax -->
+    <script src="https://cdn.jsdelivr.net/parallax.js/1.4.2/parallax.min.js"></script>
+    <!-- Script firebase -->
+    <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-database.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-database.js"></script>
+
+
+</head>
+<body>
+    <script src="js/script.js"></script>
+    <header>
+        <div class="container" id="nav-container">
+            <nav class="navbar navbar-expand-lg fixed-top">
+                <a href="#" class="navbar-brand">
+                    <img id="logo" src="img/logo_CEPEG_teste.png" alt="CEPEG"> CEPEG
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-links"
+                aria-controls="navbar-links" aria-expanded="false" area-label="Toggle navigation">
+                    <span clas="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbar-links">
+                    <div class="navbar-nav">
+                        <a href="#nav-container" class="nav-item nav-link" id="nome-menu">Home</a>
+                        <a href="downloads.html" class="nav-item nav-link" id="downloads-menu">Downloads</a>
+                        <a href="visualizar_dados.html" class="nav-item nav-link" id="nome-menu"> Relatórios </a> 
+                        <a href="cadastrar_setor.html" class="nav-item nav-link cadastro" id="logout-menu" onclick="abrir_menu()">Cadastrar Setor</a>
+                        <a href="cadastrar_funcionario.html" class="nav-item nav-link cadastro" id="logout-menu" onclick="abrir_menu()">Cadastrar Funcionário</a>
+                        <a href="tela_logout.html" class="nav-item nav-link" id="logout-menu"><img id="logout" src="img/imagem_logout.png" alt="Logout"> Logout </a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <main>
+    <div class="container-fluid">
+        <div id="about-area">
+            <div class="container">
+                <div class="row">
+        <div class="col-md-12" style="margin-top: -10px;">
+
+            <p class="pagina-download"> Bem vindo a área de cadastro!</p>
+            <p class="pagina-download"> Aqui você consegue cadastrar os setores de serviço da sua empresa que serão utilizados na verificação do CEPEG </p>
+        
+            <p style="font-size: 20px;">Setor da empresa: <input class="input_setor" id="input_nome_setor" type="text" placeholder="Digite aqui">
+            <button class="botao_cadastro" onclick="CadastrarEpis()" id="botao_cadastrar"> Concluido </button></p>
+        </div>
+        <div class="col-md-12" style="margin-top: 30px; display: none;" id="div_epi">
+            <div>
+            <button onclick="CadastrarCapacete()" id="botao_capacete" class="botao_cadastro_epis"><img src="img/imagem_capacete.png"> Capacete de proteção </button>
+            <button onclick="CadastrarPA()" id="botao_pa" class="botao_cadastro_epis"><img src="img/Imagem_pa.png"> Protetor auricular </button>
+            <button onclick="CadastrarLuva()" id="botao_luvas" class="botao_cadastro_epis"><img src="img/Imagem_luvas.png"> Luvas de proteção </button>
+            </div>
+            <br>
+            <div>
+            <button onclick="CadastrarColete()" id="botao_colete" class="botao_cadastro_epis"><img class="imagem_botao" src="img/Imagem_colete.png"> Colete de proteção </button>
+            <!-- <button onclick="calca()" class="botao_cadastro_epis"> Calça de proteção </button> -->
+            <button onclick="CadastrarBotas()" id="botao_botas" class="botao_cadastro_epis"><img src="img/Imagem_botas.png"> Botas de proteção </button>
+            <button onclick="CadastrarOculos()" id="botao_oculos" class="botao_cadastro_epis"><img src="img/Imagem_oculos.png"> Óculos de proteção </button>
+            </div>
+            <br>
+            <div style="text-align:center">
+            <button onclick="Concluir()" id="botao_concluido" class="botao_concluido"> Concluído </button><br>
+            <button onclick="CadastrarOutroSetor()"" id="botao_cadastrar_setor" class="botao_cadastrar_setor"> Cadastrar outro setor </button>
+            </div>
+        </div>
+        </div>
+         </div>
+        </div>
+     </div>
+    </div>
+    </main>
+
+</body>
+</html>
