@@ -116,7 +116,7 @@ var usar_capacete = false, usar_luvas = false, usar_botas = false, usar_colete =
 var cadastro_concluido = false, resElement, i, empresa;
 
 function ReceberNomeSetor(){
-    empresa = localStorage.getItem('nome')
+    empresa = localStorage.getItem('empresa')
     NomeSetor = document.getElementById('input_nome_setor').value;
     return NomeSetor;
 }
@@ -242,6 +242,74 @@ function CadastrarEpis(){
 }
 // ----------- CADASTRO DOS FUNCIONARIOS -----------
 var json_setores;
+var table_criada = false;
+
+function DadosFuncionarios(json_funcionarios){
+    console.log(json_funcionarios)
+    if(table_criada == false){
+
+        tabela_funcionarios = document.getElementById('tabela')
+        tabela = document.createElement('table')
+        thead = document.createElement('thead')
+        tbody = document.createElement('tbody')
+        tabela.border=1
+        tabela.appendChild(thead)
+        tabela.appendChild(tbody)
+        tabela_funcionarios.appendChild(tabela)
+
+        header = document.createElement('tr')
+        nome_funcionario = document.createElement('th')
+        setor = document.createElement('th')
+        nome_funcionario.innerHTML = 'Funcionário'
+        setor.innerHTML = 'Setor'
+
+        header.appendChild(nome_funcionario)
+        header.appendChild(setor)
+
+        thead.appendChild(header)
+        for(elemento_funcionario in json_funcionarios){
+
+            linha = document.createElement('tr')
+            celula1 = document.createElement('td')
+            celula2 = document.createElement('td')
+
+            celula1.innerHTML = elemento_funcionario
+            celula2.innerHTML = json_funcionarios[elemento_funcionario]['setor']
+
+            linha.appendChild(celula1)
+            linha.appendChild(celula2)
+
+            tbody.appendChild(linha)
+
+            console.log(elemento_funcionario)
+
+            console.log(json_funcionarios[elemento_funcionario]['setor'])
+        }
+        table_criada = true
+
+    }
+}
+
+function VisualizarFuncionariosCadastrados(){
+    empresa = localStorage.getItem('empresa')
+
+    referencia_funcionarios = empresa + '/funcionarios'
+    console.log(empresa)
+    try{
+        db
+         .ref(referencia_funcionarios)
+           .once('value')
+           .then(function(snapshot){
+               resElement = snapshot.val();
+               
+               DadosFuncionarios(resElement)
+        })
+    }
+    catch(error){
+        console.log(error)
+        alert('Problema!')
+    }
+}
 
 function RecarregarPagina(){
     location.reload()
@@ -303,9 +371,7 @@ function BuscarDados(x){
     
 }
 function CadastrarFuncionarios(){
-    empresa = localStorage.getItem('nome')
-
-    console.log(empresa)
+    empresa = localStorage.getItem('empresa')
     referencia_setores = empresa+'/Setores'
     try{
         db
@@ -341,26 +407,66 @@ function DadosEmpresa(resElement, senha_conta, nome_empresa){
     
 }
 
+function VerificarEmail(elemento_email, email){
+    div = document.getElementById('main-div')
+    div_login = document.getElementById('box-login')
+    label_retorno_login = document.getElementById('retorno_login')
+
+    if(elemento_email == email){
+        div_login.style.display='none'
+        div.style.display='block'
+        localStorage.setItem('empresa', username)
+    }
+    else{
+        console.log('email e usuario nao batem')
+        label_retorno_login.innerHTML = 'Verifique o nome da empresa'
+        setTimeout(function(){
+            label_retorno_login.innerHTML = ''
+        }, 3000)
+    }
+
+}
+
 function LogarConta(){
     username = document.getElementById('username').value;
+    email = document.getElementById('email-login').value;
     password = document.getElementById('password').value;
-
-    localStorage.setItem('nome', username)
-
-    try{
-        db
-         .ref(username)
-           .once('value')
-           .then(function(snapshot){
+    
+    firebase.auth().signInWithEmailAndPassword(email, password)
+    .then((userCredential) => {
+        // Signed in
+        var user = userCredential.user;
+        referencia_email = username + '/email'
+        try{
+            db
+            .ref(referencia_email)
+            .once('value')
+            .then(function(snapshot){
                resElement = snapshot.val();
-               
-               DadosEmpresa(resElement, password, username)
+               VerificarEmail(resElement, email)
         })
-    }
-    catch(error){
-        console.log(error)
-        alert('Problema!')
-    }
+        }
+        catch(error){
+            alert('Problema')
+        }
+
+        // ...
+    })
+    .catch((error) => {
+        label_retorno_login = document.getElementById('retorno_login')
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        if(errorCode == 'auth/wrong-password'){
+            label_retorno_login.innerHTML = 'Senha incorreta'
+        }
+        if(errorCode == 'auth/invalid-email'){
+            label_retorno_login.innerHTML = 'Email não cadastrado'
+        }
+        if(errorCode == 'auth/user-not-found'){
+            label_retorno_login.innerHTML = 'Conta não cadastrada'
+        }
+    });
+
     
 }
 
@@ -368,18 +474,27 @@ function CadastrarConta(){
     usuario = document.getElementById('usuario').value
     senha = document.getElementById('senha').value
     email = document.getElementById('email').value
-    label_retorno_cadastro = document.getElementById('retorno_cadastro')
-    try{
-        db.ref(usuario).set({
-            Senha: senha,
-            Email: email
-        })
-        label_retorno_cadastro.innerHTML = 'Empresa cadastrada com sucesso'
 
-    }
-    catch(error){
+    firebase.auth().createUserWithEmailAndPassword(email, senha)
+     .then((userCredential) => {
+        // Signed in
+        var user = userCredential.user;
+        console.log('Funcionou')
+        try{
+            db.ref(usuario).set({
+                nome: usuario,
+                email: email
+            })
+        }catch(error){
+            alert(erro)
+        }
+    })
+    .catch((error) => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
         console.log(error)
-        alert('Problema ao cadastrar')
-    }
+        console.log('Não funcionou')  });
+
+
 }
 

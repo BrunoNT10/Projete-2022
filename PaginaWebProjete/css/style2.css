@@ -1,4 +1,4 @@
-html, body{
+.imagem-fundo{
     overflow: hidden;
     margin: 0;
     padding: 0;
@@ -12,11 +12,12 @@ html, body{
     background-color: white;
     margin-top: 5%;
     margin-left: 37%;
-    border: 2px solid rgb(255, 166, 0);
+    /* box-shadow: 5px 5px 5px 5px rgb(73, 173, 212), -5px -5px 5px 5px rgb(73, 173, 212); */
+    border: 2px solid rgb(4, 94, 129);
     border-radius: 20px;
     padding: 10px;
-    width: 387px;
-    height: 450px;
+    width: 400px;
+    height: 530px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     text-align: center;
 }
@@ -36,7 +37,7 @@ html, body{
     border-radius: 30px;
     border:none;
     color:white;
-    background-color: rgb(5, 226, 5);
+    background-color: rgb(5, 163, 226);
     margin-top: 5%;
     transition: 0.5s;
 }
@@ -46,5 +47,5 @@ html, body{
     border-radius: 30px;
     border:none;
     color:white;
-    background-color: rgb(7, 160, 7);
+    background-color: rgb(4, 110, 151);
 }

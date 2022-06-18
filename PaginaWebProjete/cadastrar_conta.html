@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - CEPEG</title>
+    <title>Cadastrar - CEPEG</title>
     <link rel="icon" type="image/png" href="img/logo_CEPEG_teste.png">
     <!-- Fonte -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,15 +32,17 @@
 
     <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-auth.js"></script>
+
 </head>
-<body style="background-image: url('img/img_epi_tela_login.jfif')">
-    
+<body>
+    <div class="imagem-fundo" style="background-image: url('img/img_epi_tela_login.jfif')">
     <div class="box-login">
         <div class="logo">
             <img src="img/Imagem_logo.png">
         </div>
         <div class="entradas-dados">
-            Usuário: <input class="input_dados" type="text" id="usuario" placeholder="Digite seu usuário"><br><br>
+            Empresa: <input class="input_dados" type="text" id="usuario" placeholder="Digite seu usuário"><br><br>
             Senha: <input class="input_dados" type="password" id="senha" placeholder="Digite sua senha"><br><br>
             E-mail: <input class="input_dados" type="mail" id="email" placeholder="Digite seu email">
         </div>
@@ -49,6 +51,7 @@
             <button class="botao_login" onclick="CadastrarConta()"> CADASTRAR </button>
             <label id="retorno_cadastro" style='color: green'></label>
         </div>
+    </div>
     </div>
     <script src="js/script.js"></script>    
 </body>

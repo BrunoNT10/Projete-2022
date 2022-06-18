@@ -13,6 +13,7 @@
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style2.css">
     <!-- Scripts -->
     <script
         src="https://code.jquery.com/jquery-3.6.0.min.js"
@@ -29,9 +30,12 @@
 
     <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-auth.js"></script>
+
 
 </head>
 <body>
+    <div id="main-div" style="display:none">
     <header>
         <div class="container" id="nav-container">
             <nav class="navbar navbar-expand-lg fixed-top">
@@ -57,100 +61,41 @@
     </header>
     <main>
         <div class="container-fluid">
-            <div id="mainSlider" class="carousel slide" data-ride="carousel">
-                <ol class="carousel-indicators">
-                    <li data-target="#mainSlider" data-slide-to="0" class="active"></li>
-                    <li data-target="#mainSlider" data-slide-to="1"></li>
-                    <li data-target="#mainSlider" data-slide-to="2"></li>
-                </ol>
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="img/imagem_carousel1.jpg" class="d-block w-100" alt="EPI 1">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h2>Quer segurança para sua empresa?</h2>
-                            <p>O CEPEG assegura a segurança dos funconários dentro da sua empresa</p>
-                            <a href="#" class="main-btn">Começar</a>
-                        </div>
-                        </div>
-                        <div class="carousel-item">
-                        <img src="img/imagem_carousel2.jpg" class="d-block w-100" alt="EPI 2">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h2>Menos acidentes de trabalho</h2>
-                            <p class="text_carousel">O CEPEG assegura que os funcionários da sua empresa estejam aptos para entrar na área de trabalho</p>
-                            <a href="cadastrar_empresa.html" class="main-btn" onclick="cadastrar_empresa()">Comece agora</a> 
-                        </div>
-                        </div>
-                        <div class="carousel-item">
-                        <img src="img/imagem_carousel3.jpg" class="d-block w-100" alt="EPI 3">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h2>A sua empresa mais segura com o CEPEG</h2>
-                            <p class="text_carousel">O CEPEG assegura a segurança dos funconários dentro da sua empresa</p>
-                            <a href="#" class="main-btn">Começar</a>
-                        </div>
-                        </div>
-                    </div>
-                    <a href="#mainSlider" class="carousel-control-prev" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a href="#mainSlider" class="carousel-control-next" role="button" data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-
-                    </div>
-                    <div id="about-area">
-                        <div id="texto_about" class="container">
-                            <div class="row">
-                                <div class="col-12">
-                                    <h3 class="main-title"> Sobre o CEPEG </h3>
-                                </div>
-                                <div class="col-md-6">
-                                    <img class="img-fluid" src="img/imagem_about.jpg">
-
-                                </div>
-                                <div class="col-md-6">
-                                    <h3 class="about-title"> Um projeto que pensa na segurança das pessoas </h3>
-                                    <p> O nosso projeto é planejado para trazer mais segurança para sua empresa</p>
-                                    <p> O CEPEG quer não só trazer segurança para o funcionário como também para sua empresa. </p>
-                                    <p> Veja o que o projeto faz: </p>
-                                    <ul id="about-list">
-                                        <li><i class="fas fa-check"></i> Assegura que os funcionários estejam aptos a trabalhar em áreas que exijam mais atenção </li>
-                                        <li><i class="fas fa-check"></i> Gera relatórios </li>
-                                        <li><i class="fas fa-check"></i> Assegura que todos os funcionários usem as EPI's antes de entrar na sua área de serviço </li>                                        
-                                    </ul>
-                                    </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="about-area">
-                        <div id="texto_area_atuacao" class="container">
-                            <div class="row">
-                                <div class="col-12">
-                                    <h3 class="main-title"> Áreas de atuação - CEPEG </h3>
-                                </div>
-                                <div class="col-md-6">
-                                    <img class="img-fluid" src="img/imagem_energia_solar.jpg">
-
-                                </div>
-                                <div class="col-md-6">
-                                    <h3 class="about-title"> Um projeto que atua em várias áreas </h3>
-                                    <p> O nosso projeto é planejado para atuar na segurança nas mais diversas empresas. </p>
-                                    <p> Por isso o CEPEG foi pensado para atuar em várias áreas em que a segurança é indispensável </p>
-                                    <p> Algumas ds áreas que o CEPEG atua: </p>
-                                    <ul id="about-list">
-                                        <li><i class="fas fa-check"></i><a href="#"><label>Mineradoras</label></a> </li>
-                                        <li><i class="fas fa-check"></i><a href="#"><label>Empresas de energia solar</label></a> </li>
-                                        <li><i class="fas fa-check"></i><a href="#"><label>Indústrias</label></a> </li>   
-                                        <li><i class="fas fa-check"></i><a href="#"><label>Construtoras</label></a> </li>                                           
-                                    </ul>
-                                    </div>
-                            </div>
+            <div id="about-area">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <img src="img/imagem_verificado.png" style="margin-top: 10%">
+                            <p class="pagina-download"> Bem vindo a área da empresa! Aqui você consegue cadastrar setores e funcionários, acessar imagens, relatórios diários e mensais. </p>
                         </div>
                     </div>
                 </div>
+            </div>   
+        </div>
 
     </main>
+    </div>
+    <div id="box-login" class='imagem-fundo' style="background-image: url('img/img_epi_tela_login.jfif')">
+    <div class="box-login">
+        <div class="logo">
+            <img src="img/Imagem_logo.png">
+        </div>
+        <br>
+        <div class="entradas-dados">
+            <form>
+                Empresa: <input class="input_dados" type="text" id="username" placeholder="Digite o nome da empresa"><br><br>
+                Email: <input class="input_dados" type="text" id="email-login" placeholder="Digite o email"><br><br>
+                Senha: <input class="input_dados" type="password" id="password" placeholder="Digite sua senha">
+            </form>
+        </div>
+        <br>
+        <div class="botoes">
+            <button class="botao_login" onclick="LogarConta()"> ENTRAR </button>
+            <a href="cadastrar_conta.html"> Ainda não tem um cadastro? </a><br>
+            <p class="pagina-download" id="retorno_login" style="color: red"></label>
+        </div>
+    </div>
+    <div>
 
     <script src="js/script.js"></script>
 </body>
